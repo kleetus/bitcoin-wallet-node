@@ -1,4 +1,8 @@
 {
+  'target_defaults': 
+    { 
+      'cflags_cc': ['-fexceptions']
+    },
   'targets': [
     {
       'target_name': 'bdb',
@@ -6,8 +10,20 @@
       'cflags': ['-fPIC'],
       'include_dirs': [
         './build_unix',
+        '.'
       ],
       'sources': [
+        "./cxx/cxx_db.cpp",
+        "./cxx/cxx_dbc.cpp",
+        "./cxx/cxx_dbt.cpp",
+        "./cxx/cxx_env.cpp",
+        "./cxx/cxx_except.cpp",
+        "./cxx/cxx_lock.cpp",
+        "./cxx/cxx_logc.cpp",
+        "./cxx/cxx_mpool.cpp",
+        "./cxx/cxx_multi.cpp",
+        "./cxx/cxx_seq.cpp",
+        "./cxx/cxx_txn.cpp",
         "./dist/../btree/bt_compare.c",
         "./dist/../btree/bt_compress.c",
         "./dist/../btree/bt_conv.c",
@@ -217,6 +233,19 @@
               'build_unix',
               '.',
             ]
+          }
+        ],
+        ['OS=="mac"', 
+          {
+            'xcode_settings': 
+              {
+                'GCC_ENABLE_CPP_EXCEPTIONS': 'YES'
+              }
+          }
+        ],
+        [ 'OS in "linux freebsd openbsd solaris android aix"', 
+          {
+            'cflags_cc': [ '-fexceptions', '-std=gnu++0x' ]
           }
         ]
       ]
