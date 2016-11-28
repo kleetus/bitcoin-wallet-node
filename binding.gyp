@@ -10,14 +10,24 @@
       'sources': [
         'src/wallet.cc'
       ],
-      "cflags": ["-Wall", "-std=c++11"],
+      'cflags': ['-Wall', '-std=c++11'],
       'include_dirs': [
-        "./dependencies/db-4.8.30.NC/build_unix", #remove this line if you have this file in your system includes
-        "./dependencies/json/src",
+        './dependencies/db-4.8.30.NC/build_unix',
+        './dependencies/json/src',
         "<!(node -e \"require('nan')\")",
         "<!(node -e \"require('streaming-worker-sdk')\")"
       ],
       'conditions': [
+        ['<!(./build_scripts/bdb.sh)=="lib"', {
+          'link_settings': {
+            'libraries': [
+              '-lpthread',
+              '-ldb_cxx-4.8'
+            ]
+          }
+        },
+        { 'dependencies': ['./dependencies/db-4.8.30.NC/bdb.gyp:bdb'] }
+        ],
         ['OS=="mac"', {
           'xcode_settings': {
             'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
@@ -41,7 +51,6 @@
       'link_settings': {
         'libraries': [
           '-lpthread',
-          '-ldb_cxx-4.8'
         ],
         'library_dirs': [
         ]
