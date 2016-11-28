@@ -7,15 +7,19 @@
     {
       'target_name': 'wallet',
       'type': 'loadable_module',
+      'variables': {
+        'deps': '<!(./build_scripts/bdb.sh dep)',
+      },
       'sources': [
         'src/wallet.cc'
       ],
-      "cflags": ["-Wall", "-std=c++11"],
+      'dependencies': [],
+      'cflags': ['-Wall', '-std=c++11'],
       'include_dirs': [
-        "./dependencies/db-4.8.30.NC/build_unix", #remove this line if you have this file in your system includes
-        "./dependencies/json/src",
-        "<!(node -e \"require('nan')\")",
-        "<!(node -e \"require('streaming-worker-sdk')\")"
+        './dependencies/db-4.8.30.NC/build_unix',
+        './dependencies/json/src',
+        '<!(node -e "require(\'nan\')")',
+        '<!(node -e "require(\'streaming-worker-sdk\')")'
       ],
       'conditions': [
         ['OS=="mac"', {
@@ -41,7 +45,7 @@
       'link_settings': {
         'libraries': [
           '-lpthread',
-          '-ldb_cxx-4.8'
+          '<!(build_scripts/bdb.sh lib)'
         ],
         'library_dirs': [
         ]
