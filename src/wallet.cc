@@ -80,9 +80,6 @@ class Stream: public StreamingWorker {
         json obj;
         unsigned char *value = (unsigned char*)malloc(256);
 
-        deserializeArray((const unsigned char*)data.get_data(), 1, value);
-        obj["cipherText"] = std::string((char*)value);
-
         std::string k(keyData);
         std::string keyType = k.substr(1, 4);
 
@@ -101,6 +98,9 @@ class Stream: public StreamingWorker {
           obj["id"] = id;
 
         } else if (keyType == "ckey") {
+
+          deserializeArray((const unsigned char*)data.get_data(), 1, value);
+          obj["cipherText"] = std::string((char*)value);
 
           deserializeArray((const unsigned char*)key.get_data(), 6, value);
           obj["pubKey"] = std::string((char*)value);
