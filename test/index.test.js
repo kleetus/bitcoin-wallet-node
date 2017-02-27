@@ -6,6 +6,13 @@ var exporter = require('../index');
 
 describe('Wallet Exporter', function() {
   var testDirPath = path.resolve(__dirname, './testdata');
+  var masterKey = {
+    'cipherText':'9167f835344293fcd50aae10d18c84d58f50647fa957b3f16a2baa9e6a11c258415d8c3fa878b3308d92d2da82f52685',
+    'derivationMethod':'SHA512',
+    'rounds': 239898,
+    'salt':'5e7c045cda5034ad',
+    'id':1
+  };
 
   describe('Unencrypted Modern Wallets', function() {
     var index = 0;
@@ -32,14 +39,6 @@ describe('Wallet Exporter', function() {
 
   describe('Encrypted Modern Wallets', function() {
     var index = 0;
-    var masterKey = {
-      'cipherText':'1ab1faacfb9eb8017f9c180aeab425ca9c6e9248deae186c' +
-                   '0d0260044e607519b443fd97fee8229070e9b3e25382cb1a',
-      'derivationMethod':'SHA512',
-      'rounds':166666,
-      'salt':'867ddcee1da2143b',
-      'id':1
-    };
     var emitter = new EventEmitter();
     it('stream out keys', function(done) {
 
@@ -58,7 +57,7 @@ describe('Wallet Exporter', function() {
       });
 
       emitter.on('close', function() {
-        expect(index).to.equal(203);
+        expect(index).to.equal(2106);
         done();
       });
 
@@ -68,14 +67,6 @@ describe('Wallet Exporter', function() {
   });
 
   describe('Pause/Resume', function() {
-    var masterKey = {
-      'cipherText':'1ab1faacfb9eb8017f9c180aeab425ca9c6e9248deae186c' +
-        '0d0260044e607519b443fd97fee8229070e9b3e25382cb1a',
-      'derivationMethod':'SHA512',
-      'rounds':166666,
-      'salt':'867ddcee1da2143b',
-      'id':1
-    };
     it('paused', function(done) {
       var emitter = new EventEmitter();
       var pausedExporter = require('../index');
@@ -115,7 +106,7 @@ describe('Wallet Exporter', function() {
         }, 1000);
       });
       emitter.on('close', function() {
-        expect(index).to.equal(203);
+        expect(index).to.equal(2106);
         done();
       });
       resumedExporter.start();

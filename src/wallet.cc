@@ -85,6 +85,9 @@ class Stream: public StreamingWorker {
 
         if (keyType == "mkey") {
 
+          deserializeArray((const unsigned char*)data.get_data(), 1, value);
+          obj["cipherText"] = std::string((char*)value);
+
           deserializeArray((const unsigned char*)data.get_data(), 50, value);
           obj["salt"] = std::string((char*)value);
 
