@@ -1,6 +1,6 @@
 {
   "name": "bitcoin-wallet-node",
-  "main": "index.js",
+  "main": "./index.js",
   "description": "Bitcoin wallet.dat key exporter",
   "author": "Chris Kleeschulte <chrisk@bitpay.com>",
   "keywords": [
@@ -21,7 +21,6 @@
   "homepage": "https://github.com/kleetus/bitcoin-wallet-node#readme",
   "version": "0.0.1",
   "license": "MIT",
-  "main": "./index.js",
   "scripts": {
     "configure": "node-gyp configure",
     "build": "node-gyp rebuild",
@@ -29,7 +28,7 @@
   },
   "dependencies": {
     "nan": "*",
-    "streaming-worker": "kleetus/streaming-worker"
+    "streaming-worker-sdk": "kleetus/streaming-worker"
   },
   "devDependencies": {
     "chai": "^3.5.0",
