@@ -19,7 +19,7 @@
     "url": "git+https://github.com/kleetus/bitcoin-wallet-node.git"
   },
   "homepage": "https://github.com/kleetus/bitcoin-wallet-node#readme",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "scripts": {
     "configure": "node-gyp configure",
